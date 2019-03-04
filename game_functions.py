@@ -8,6 +8,8 @@ def check_events(ship, bullets, screen, settings):
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_q:
+                sys.exit()
             check_ship_keydown(event, ship)
             check_bullet_keydown(event, ship, bullets, settings, screen)
         elif event.type == pygame.KEYUP:
@@ -39,10 +41,11 @@ def update_bullets(bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
-def update_screen(settings, ship, bullets,  screen):
+def update_screen(settings, ship, bullets, alien, screen):
     """Draws background and game elements to the window"""
     screen.fill(settings.bg_colour)
-    ship.draw()
     for bullet in bullets.sprites():
         bullet.draw()
+    ship.draw()
+    alien.draw()
     pygame.display.flip()
